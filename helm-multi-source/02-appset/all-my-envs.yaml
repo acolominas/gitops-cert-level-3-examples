@@ -33,6 +33,14 @@ spec:
         region: us
         type: prod
         version: prod
+      - env: integration-gpu
+        region: us
+        type: non-prod
+        version: qa
+      - env: integration-non-gpu
+        region: us
+        type: non-prod
+        version: qa
   template:
     metadata:
       name: '{{.env}}'
@@ -48,7 +56,7 @@ spec:
             valueFiles:
             - $values/helm-multi-source/my-values/common-values.yaml
             - $values/helm-multi-source/my-values/app-version/{{.version}}-values.yaml
-            - $values/helm-multi-source/my-values/env-type/{{.type}}-values.yaml  
+            - $values/helm-multi-source/my-values/env-type/{{.type}}-values.yaml
             - $values/helm-multi-source/my-values/regions/{{.region}}-values.yaml
             - $values/helm-multi-source/my-values/envs/{{.env}}-values.yaml
         - repoURL: 'https://github.com/acolominas/gitops-cert-level-3-examples.git'
